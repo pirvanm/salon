@@ -27,7 +27,7 @@ export default function Authenticated({ user, header, children }) {
                             </div>
                         </div>
 
-                        <div className="hidden sm:flex sm:items-center sm:ms-6">
+                        {/*<div className="hidden sm:flex sm:items-center sm:ms-6">
                             <div className="ms-3 relative">
                                 <Dropdown>
                                     <Dropdown.Trigger>
@@ -86,10 +86,11 @@ export default function Authenticated({ user, header, children }) {
                                     />
                                 </svg>
                             </button>
-                        </div>
+                        </div>*/}
                     </div>
                 </div>
 
+                {/*
                 <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
                     <div className="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
@@ -111,6 +112,7 @@ export default function Authenticated({ user, header, children }) {
                         </div>
                     </div>
                 </div>
+                */}
             </nav>
 
             {header && (

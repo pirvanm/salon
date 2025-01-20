@@ -21,6 +21,8 @@ Route::get('file-upload', [FileController::class, 'index'])->name('file.upload')
 
 Route::post('file-upload', [FileController::class, 'store'])->name('file.upload.store');
 
+Route::get('dasboard', function () {})->name('dashboard');
+
 // Route::get('/', function () {
 //     return Inertia::render('Welcome', [
 //         'canLogin' => Route::has('login'),
