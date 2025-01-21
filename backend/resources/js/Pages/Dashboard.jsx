@@ -3,12 +3,23 @@ import Authenticated from '@/Layouts/AuthenticatedLayout.jsx';
 import { Head } from '@inertiajs/react';
 import axios from 'axios';
 
+
+
 export default function Dashboard(props) {
     // State for file upload form
     const [data, setData] = useState({
         title: "",
         file: null,
     });
+
+    axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+    const token = document.head.querySelector('meta[name="csrf-token"]');
+    if (token) {
+        axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+    } else {
+        console.error('CSRF token not found');
+    }
 
     // State for list of files
     const [files, setFiles] = useState([]);

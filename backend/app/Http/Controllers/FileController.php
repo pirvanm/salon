@@ -33,9 +33,7 @@ class FileController extends Controller
     public function index()
 
     {
-
         $files = File::latest()->get();
-
         return Inertia::render('FileUpload', compact('files'));
     }
 
@@ -55,31 +53,20 @@ class FileController extends Controller
     {
 
         Validator::make($request->all(), [
-
             'title' => ['required'],
-
             'file' => ['required'],
-
         ])->validate();
 
 
-
         $fileName = time() . '.' . $request->file->extension();
-
         $request->file->move(public_path('uploads'), $fileName);
 
-
-
         File::create([
-
             'title' => $request->title,
 
             'name' => $fileName
 
         ]);
-
-
-
         return redirect()->route('file.upload');
     }
 }
