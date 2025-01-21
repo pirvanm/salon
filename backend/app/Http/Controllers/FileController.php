@@ -34,6 +34,7 @@ class FileController extends Controller
             'files' => $files,
             'isLoggedIn' => $isLoggedIn,
             'userId' => $userId, // Send the user ID if logged in
+            'user' => $user,
         ]);
     }
 
