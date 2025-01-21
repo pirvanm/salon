@@ -23,16 +23,11 @@ Route::get('/s', function () {
     return view('welcome');
 });
 
-
-
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-
-
 Route::get('/', function () {
+    return Inertia::render('FileUpload');
+});
+
+Route::get('/demo', function () {
     return Inertia::render('Home');
 });
 
