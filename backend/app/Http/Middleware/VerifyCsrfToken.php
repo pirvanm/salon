@@ -12,6 +12,8 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        //
+        'api/*',  // Disable CSRF for API routes
+        'logout', // Disable CSRF for logout route if it's a stateless request
+
     ];
 }

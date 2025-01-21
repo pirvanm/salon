@@ -35,6 +35,18 @@ return [
 
     'expire_on_close' => false,
 
+    'session' => [
+        'driver' => env('SESSION_DRIVER', 'file'),
+        'lifetime' => 120,
+        'expire_on_close' => false,
+        'encrypt' => false,
+        'files' => storage_path('framework/sessions'),
+        'cookie' => 'laravel_session',
+        'same_site' => 'strict', // Adjust this if you're using APIs or cross-site requests
+        'secure' => env('SESSION_SECURE_COOKIE', false),
+    ],
+
+
     /*
     |--------------------------------------------------------------------------
     | Session Encryption
@@ -128,7 +140,7 @@ return [
 
     'cookie' => env(
         'SESSION_COOKIE',
-        Str::slug(env('APP_NAME', 'laravel'), '_').'_session'
+        Str::slug(env('APP_NAME', 'laravel'), '_') . '_session'
     ),
 
     /*

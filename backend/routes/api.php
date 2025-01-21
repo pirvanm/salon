@@ -19,21 +19,21 @@ use Inertia\Inertia;
 // });
 
 
-Route::get('/s', function () {
-    return view('welcome');
-});
+// Route::get('/s', function () {
+//     return view('welcome');
+// });
 
-Route::get('/', function () {
-    return Inertia::render('FileUpload');
-});
+// Route::get('/', function () {
+//     return Inertia::render('FileUpload');
+// });
 
-Route::get('/demo', function () {
-    return Inertia::render('Home');
-});
+// Route::get('/demo', function () {
+//     return Inertia::render('Home');
+// });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Route::middleware('auth')->group(function () {
 //     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
