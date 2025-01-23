@@ -1,6 +1,6 @@
-// Import necessary libraries
+
 import Authenticated from '@/Layouts/AuthenticatedLayout.jsx';
-import { Head, useForm } from '@inertiajs/react';
+import { Head, useForm, usePage } from '@inertiajs/react';
 import React, { useEffect } from 'react';
 
 export default function FileUpload(props) {
@@ -12,49 +12,13 @@ export default function FileUpload(props) {
         file: null,
     });
 
-    // Redirect the user if they are not logged in
-    useEffect(() => {
-        if (!isLoggedIn) {
-            window.location.href = '/login'; // Redirect to login page if not logged in
-        }
-    }, [isLoggedIn]);
-
-    // Redirect the user if userId == 2
-    useEffect(() => {
-        if (userId === 2) {
-            window.location.href = '/restricted'; // Redirect to the desired route
-        }
-    }, [userId]);
-
-    function handleSubmit(e) {
-        e.preventDefault();
-        post(route("file.upload.store"), {
-            onSuccess: () => {
-                setData("title", "");
-                setData("file", null);
-                setData("category", "others");
-            },
-        });
-    }
-
-    // Handle logout by calling the Laravel logout route
-    function handleLogout() {
-        // Call the logout route using Inertia's post method
-        post(route('logout'), {
-            onSuccess: () => {
-                // After logout, you can redirect the user, clear the form, etc.
-                window.location.href = '/'; // Redirect to the home page (or wherever you'd like)
-            }
-        });
-    }
-
     return (
         <Authenticated
             user={props.user}
             errors={props.errors}
             header={
                 <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    Laravel React JS File Upload Example
+                    Fa-ma frumos
                 </h2>
             }
         >
@@ -66,16 +30,14 @@ export default function FileUpload(props) {
                             {/* Show login status and user ID */}
                             {isLoggedIn ? (
                                 <div>
-                                    <p>Welcome, User ID: {userId} </p>
-                                    {/* Show Logout Button if userId !== 1 */}
-                                    {userId !== 1 && (
-                                        <button
-                                            onClick={handleLogout}
-                                            className="px-6 py-2 font-bold text-white bg-red-500 rounded mt-4"
-                                        >
-                                            Logout
-                                        </button>
-                                    )}
+                                    <p>Welcome, User ID: {userId}</p>
+                                    {/* Logout Button */}
+                                    <button
+                                        onClick={handleLogout}
+                                        className="px-6 py-2 font-bold text-white bg-red-500 rounded mt-4"
+                                    >
+                                        Logout
+                                    </button>
                                 </div>
                             ) : (
                                 <p>You are not logged in.</p>

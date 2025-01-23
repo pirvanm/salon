@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,11 +20,16 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 require __DIR__ . '/auth.php';
 
+
+
+
+
 Route::middleware(['auth'])->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });
 
 Route::get('file-upload', [FileController::class, 'index'])->name('file.upload')->middleware('auth');
+Route::get('files', [FileController::class, 'show'])->name('file.list');
 
 Route::post('file-upload', [FileController::class, 'store'])->name('file.upload.store')->middleware('auth');
 
