@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -29,9 +30,11 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('file-upload', [FileController::class, 'index'])->name('file.upload')->middleware('auth');
-Route::get('/', [FileController::class, 'show'])->name('file.list')->middleware('auth');
+Route::get('/files', [FileController::class, 'show'])->name('file.list')->middleware('auth');
 
 Route::post('file-upload', [FileController::class, 'store'])->name('file.upload.store')->middleware('auth');
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');
