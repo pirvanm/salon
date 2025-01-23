@@ -12,6 +12,17 @@ export default function FileUpload(props) {
         file: null,
     });
 
+    // Handle logout by calling the Laravel logout route
+    function handleLogout() {
+        // Call the logout route using Inertia's post method
+        post(route('logout'), {
+            onSuccess: () => {
+                // After logout, you can redirect the user, clear the form, etc.
+                window.location.href = '/'; // Redirect to the home page (or wherever you'd like)
+            }
+        });
+    }
+
     return (
         <Authenticated
             user={props.user}
@@ -42,70 +53,6 @@ export default function FileUpload(props) {
                             ) : (
                                 <p>You are not logged in.</p>
                             )}
-
-                            {/* File Upload Form */}
-                            <form name="createForm" onSubmit={handleSubmit}>
-                                <div className="flex flex-col">
-                                    <div className="mb-4">
-                                        <label className="">Title</label>
-                                        <input
-                                            type="text"
-                                            className="w-full px-4 py-2"
-                                            name="title"
-                                            value={data.title}
-                                            onChange={(e) => setData("title", e.target.value)}
-                                        />
-                                        <span className="text-red-600">{errors.title}</span>
-                                    </div>
-                                    <div className="mb-4">
-                                        <label className="">Category</label>
-                                        <select
-                                            className="w-full px-4 py-2"
-                                            name="category"
-                                            value={data.category || ""}
-                                            onChange={(e) => setData("category", e.target.value)}
-                                        >
-                                            <option value="">Select Category</option>
-                                            <option value="nature">Nature</option>
-                                            <option value="animals">Animals</option>
-                                            <option value="technology">Technology</option>
-                                            <option value="others">Others</option>
-                                        </select>
-                                        <span className="text-red-600">{errors.category}</span>
-                                    </div>
-                                    <div className="mb-4">
-                                        <label className="">File</label>
-                                        <input
-                                            type="file"
-                                            className="w-full px-4 py-2"
-                                            name="file"
-                                            onChange={(e) => setData("file", e.target.files[0])}
-                                        />
-                                        <span className="text-red-600">{errors.file}</span>
-                                    </div>
-                                </div>
-
-                                {/* Show progress if available */}
-                                {progress && (
-                                    <div className="w-full bg-gray-200 rounded-full dark:bg-gray-700">
-                                        <div
-                                            className="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
-                                            style={{ width: `${progress.percentage}%` }}
-                                        >
-                                            {progress.percentage}%
-                                        </div>
-                                    </div>
-                                )}
-
-                                <div className="mt-4">
-                                    <button
-                                        type="submit"
-                                        className="px-6 py-2 font-bold text-white bg-green-500 rounded"
-                                    >
-                                        Save
-                                    </button>
-                                </div>
-                            </form>
 
                             {/* Display uploaded files */}
                             <h1 className="text-xl font-semibold mt-6 mb-4">Uploaded File List:</h1>

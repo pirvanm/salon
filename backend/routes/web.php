@@ -29,17 +29,9 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('file-upload', [FileController::class, 'index'])->name('file.upload')->middleware('auth');
-Route::get('files', [FileController::class, 'show'])->name('file.list');
+Route::get('/', [FileController::class, 'show'])->name('file.list')->middleware('auth');
 
 Route::post('file-upload', [FileController::class, 'store'])->name('file.upload.store')->middleware('auth');
-
-Route::get('dasboard', function () {
-    return redirect('/file-upload');
-})->name('dashboard');
-
-Route::get('/', function () {
-    return redirect('/login');
-});
 
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');

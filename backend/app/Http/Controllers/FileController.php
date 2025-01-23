@@ -38,16 +38,22 @@ class FileController extends Controller
         ]);
     }
 
+    public function show()
+    {
+        $files = File::all()->groupBy('category');
+        $user = Auth::user(); // Get the authenticated user
+        $isLoggedIn = $user !== null; // Check if the user is logged in
+        $userId = $isLoggedIn ? $user->id : null; // If logged in, get the user's ID
 
-    /**
 
-     * Show the form for creating a new resource.
+        return Inertia::render('Files', [
+            'files' => $files,
+            'isLoggedIn' => $isLoggedIn,
+            'userId' => $userId, // Send the user ID if logged in
+            'user' => $user,
+        ]);
+    }
 
-     *
-
-     * @return Response
-
-     */
 
     public function store(Request $request)
     {
@@ -59,9 +65,10 @@ class FileController extends Controller
         // Store the uploaded file
         if ($request->hasFile('file')) {
             $path = $request->file('file')->store('uploads', 'public');
-            return response()->json(['message' => 'File uploaded successfully!', 'path' => $path]);
         }
 
-        return response()->json(['message' => 'No file uploaded'], 400);
+        // store file information in database
+
+        return back();
     }
 }
