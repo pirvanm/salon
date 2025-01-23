@@ -58,14 +58,23 @@ class FileController extends Controller
     public function store(Request $request)
     {
         // Validate the incoming request
-        $request->validate([
-            'file' => 'required|file|mimes:jpg,jpeg,png,pdf|max:10240',  // Example validation
+
+
+        Validator::make($request->all(), [
+            'title' => ['required'],
+            'file' => ['required'],
+        ])->validate();
+        $fileName = time() . '.' . $request->file->extension();
+        $request->file->move(public_path('uploads'), $fileName);
+        File::create([
+            'title' => $request->title,
+            'name' => $fileName
         ]);
 
         // Store the uploaded file
-        if ($request->hasFile('file')) {
-            $path = $request->file('file')->store('uploads', 'public');
-        }
+        // if ($request->hasFile('file')) {
+        //     $path = $request->file('file')->store('uploads', 'public');
+        // }
 
         // store file information in database
 
